@@ -1,7 +1,182 @@
+<!--
+References:
+METAR: https://tgftp.nws.noaa.gov/data/observations/metar/stations/YBBN.TXT
+TAF: https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/YBBN.TXT
+- https://ckc.clubexpress.com/#top
+- https://www.data.qld.gov.au/dataset/brisbane-bar-tide-gauge-predicted-interval-data/resource/8a5a5e32-2ed4-4252-8c2a-074188556d5b
+- http://www.bom.gov.au/australia/tides/print.php?aac=QLD_TP138&type=tide&date=01-08-2023&region=QLD&tz=Australia/Brisbane&tz_js=AEST&days=20
+- http://www.bom.gov.au/australia/tides/scripts/getNextTides.php?aac=QLD_TP138&offset=false&tz=Australia%2FBrisbane 
+- https://community.home-assistant.io/t/restful-sensor-json-help-australian-tide-predictions-bom/149663/19
+-->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="West End, Spearers, kayak, canoe, surfski, Brisbane">
+    <meta name="description" content="West End Spearers Kayak Group">
+    <meta name="author" content="Devon Matsalla">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West End Spearers Kayaking Club</title>
+    <link rel="icon" type="image/x-icon" href="spearers.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/polyline-encoded@0.0.9/Polyline.encoded.min.js"></script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <header>
+        <nav class="navigation">
+            <table><tr>
+                <th>
+                    <div class="logo">
+                        <img src="spearers.png" alt="Logo" height="200">
+                    </div>
+                </th><th>
+                    <div class="title">
+                        <h1>West End Spearers</h1>
+                        <!--   <h2>Subtitle</h2>  -->
+                    </div>
+                </th><th>
+                    <div class="author">
+                        <img src="spearers.png" alt="Logo" height="200">
+                    </div>
+                </th>
+            </tr></table>
+        </nav>
+    </header>
+    
+    <main>
+        <img src="BrisbaneRiver.jpg" style="max-width: 100%">
+        <!-- <table class="calendar"><thead><tr>
+            <th><a href="#home">Home</a> </th>
+            <th><a href="#tides">Tides & Weather</a> </th>
+            <th><a href="#calendarsection">Calendar</a> </th>
+            <th><a href="#cheese">Cheese</a> </th>
+            <th><a href="#members">Members</a> </th>
+            <th><a href="#map">Map</a> </th>
+            <th><a href="#contact">Contact Us</a> </th>
+        </tr></thead></table>  -->
+        
+        <section id="home">
+            <h2>Home</h2>
+            <p>Since 2003, Spearers have been paddling the Brisbane River every Monday, Wednesday, and Friday at 5am.</p>
+        </section>
+
+        <section id="tides">
+            <h2>Tides and Weather</h2>
+            <p>(+ precip. last 24h impact on tides, sunrise/sunset, temp)</p>
+            <div id="nextTide"></div>
+            <div class="container">
+                <canvas id="myCanvas" width="1600" height="240"></canvas>
+            </div>
+            <p style="font-size:7;"><a href="http://www.bom.gov.au/australia/tides/#!/qld-brisbane-port-office">Source = BOM<a></a>. Tides adjusted for current of 1 km/h"
+        </section>
+
+        <section id="calendarsection">
+            <h2>Calendar</h2>
+            <table class="calendar" id="calendar">
+              <thead>
+                <tr>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- JavaScript will populate this section -->
+              </tbody>
+            </table>
+        </section>
+
+        <section id="cheese">
+            <h2>Cheese</h2>
+            <img src='IMG-20230721-WA0002.jpg' height='400'>
+            <p>(rules of the cheese)</p>
+        </section>
+
+        <section id="members">
+            <h2>Members</h2>
+            <p>(Include a photo gallery)</p>
+            <table style="width:100%">
+              <tr>
+                <th>Member</th><th>Handicap</th><th>Comment</th>
+              </tr><tr>
+                <td>Clive</td><td>1.0</td><td></td>
+              </tr><tr>
+                <td>Simon T</td><td>1.0</td><td>Original</td>
+              </tr><tr>
+                <td>John S</td><td>2.0</td><td></td>
+              </tr><tr>
+                <td>Monty</td><td>2.0</td><td>Original</td>
+              </tr><tr>
+                <td>Tony</td><td>2.0</td><td></td>
+              </tr><tr>
+                <td>Frans</td><td>2.5</td><td></td>
+              </tr><tr>
+                <td>Piet</td><td>3.0</td><td></td>
+              </tr><tr>
+                <td>Jannie</td><td>3.0</td><td></td>
+              </tr><tr>
+                <td>James</td><td>3.0</td><td>Original</td>
+              </tr><tr>
+                <td>Simon D</td><td>3.5</td><td></td>
+              </tr><tr>
+                <td>Steve</td><td>3.5</td><td></td>
+              </tr><tr>
+                <td>Devon</td><td>4.0</td><td></td>
+              </tr><tr>
+                <td>Luke</td><td>4.5</td><td></td>
+              </tr><tr>
+                <td>Aaron</td><td>5.0</td><td></td>
+              </tr><tr>
+                <td>Dave L</td><td>5.0</td><td></td>
+              </tr><tr>
+                <td>Dave B</td><td>5.0</td><td>Foxy</td>
+              </tr><tr>
+                <td>Peter I</td><td>6.0</td><td></td>
+              </tr>
+            </table>
+        </section>
+
+        <h2>Map</h2>
+        <p>(+ more boat launches, + route and stats for rock and the city)</p>
+        <section id="map">
+            <div id="map"></div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+
+  <form action="mailto:spearers@gmail.com" method="post" enctype="text/plain">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required><br>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="40" required></textarea><br>
+    <input type="submit" value="Submit">
+  </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 The Spearers Kayaking Club. All rights reserved.</p>
+    </footer>
+
+    <script src="tide_list.js"></script>
+    <script src="events.js"></script>
+    <script src="calendar.js"></script>
+    <script src="tides.js"></script>
+    <script src="data.js"></script>
+    <script src="map.js"></script>
 </body>
 </html>

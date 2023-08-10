@@ -1,0 +1,16 @@
+const events = [
+    { date: "2023-08-16", event: "Ekka" },
+    { date: "2023-08-18", event: "Cheese" },
+    { date: "2023-10-02", event: "King's Birthday" },
+    { date: "2023-10-31", event: "Halloween" },
+    { date: "2023-11-10", event: "AGM" },
+    { date: "2023-11-11", event: "AGM" },
+    { date: "2023-12-25", event: "Merry Christmas!" },
+    { date: "2024-01-01", event: "Happy New Year!" },
+    { date: "2024-01-26", event: "Australia Day" },
+    { date: "2024-03-29", event: "Good Friday" },
+    { date: "2024-04-01", event: "Easter Monday" },
+    { date: "2024-04-25", event: "Anzac Day" },
+    { date: "2024-05-06", event: "Labour Day" },
+    { date: "2024-08-14", event: "Ekka" },
+];

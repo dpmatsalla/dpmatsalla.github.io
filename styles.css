@@ -1,0 +1,106 @@
+body,html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+.container {
+    width: 100%;
+    height: 250px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+canvas {
+    /*width: 800px;
+    height: 240px;*/
+    border: 1px solid #000000;
+    background-color: beige;
+}
+#map {
+    width: 100%;
+    height: 400px;
+}
+.navigation {
+  background-color: darkblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+}
+.logo {
+  text-align: left;
+}
+.logo img {
+  height: 80px;
+}
+.title {
+  text-align: center;
+}
+.author {
+  text-align: right;
+}
+.author img {
+  height: 80px;
+}
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+td {
+    border: none;
+    font-size: 14px;
+    padding: 3px;
+}
+.calendar {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid blue;
+  background-color: beige;
+}
+.calendar th {
+  border: 1px solid gray;
+  font-size: 14px;
+  text-align: center;
+  padding: 2px;
+}
+.calendar td {
+  border: 1px solid gray;
+  font-size: 12px;
+  vertical-align: top;
+  text-align: center;
+  padding: 0px;
+}
+.calendar thead {
+  background-color: darkblue;
+  color: #fff000;
+}
+.calendar .hightide {
+  font-size: 7px;
+  color: green;
+}
+.calendar .lowtide {
+  font-size: 7px;
+  color: brown;
+}
+.calendar .today {
+  font-weight: bold;
+  color: red;
+}
+.content {
+  background-color: darkgreen;
+  padding: 20px;
+  color: white;
+  min-height: 80vh;
+}
+.content h2 {
+  text-align: center;
+}
+form {
+  text-align: center;
+  margin-top: 20px;
+}
+button {
+  font-size: 24px;
+  padding: 10px 20px;
+}
