@@ -49,17 +49,25 @@ function nextTide() {
           <th>Date/Time</th> \
           <th>Tide</th> \
           <th>Wind</th> \
+          <th>Sunrise/sunset</th> \
+          <th>Temp</th> \
         </tr><tr> \
           <td>Now</td> \
           <td>' + tideText(now) + '</td> \
+          <td></td> \
+          <td></td> \
           <td></td> \
         </tr><tr> \
           <td>' + nextDate + ', 5am</td> \
           <td>' + tideText(next5am) + '</td> \
           <td></td> \
+          <td></td> \
+          <td></td> \
         </tr><tr> \
           <td>' + nextDate2 + ', 5am</td> \
           <td>' + tideText(next5am + day) + '</td> \
+          <td></td> \
+          <td></td> \
           <td></td> \
       </tr></table>';
         
