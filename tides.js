@@ -45,7 +45,7 @@ function nextTide() {
     nextTime2.setDate(nextTime.getDate() + 1);
     let nextDate2 =  formatDay(nextTime2);
 
-    nextTide.innerHTML = '<table width="100%"><tr> \
+    nextTide.innerHTML = '<table><tr> \
           <th>Date/Time</th> \
           <th>Tide</th> \
           <th>Wind</th> \
