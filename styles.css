@@ -51,6 +51,7 @@ td {
 .calendar {
   border-collapse: collapse;
   width: 100%;
+  table-layout:fixed;
   border: 2px solid blue;
   background-color: beige;
 }
