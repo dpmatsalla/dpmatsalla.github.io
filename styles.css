@@ -43,10 +43,6 @@ canvas {
 .author img {
   height: 80px;
 }
-table {
-    width: 100%;
-    table-layout: fixed;
-}
 td {
     border: none;
     font-size: 14px;
