@@ -1,3 +1,7 @@
+// Incorporate historical heights of brisbane river in the horizontal graph
+// http://www.bom.gov.au/fwo/IDQ65389/IDQ65389.540683.tbl.shtml
+// http://www.bom.gov.au/fwo/IDQ65389/IDQ65389.540683.plt.shtml
+
 function formatDay(date) {
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
